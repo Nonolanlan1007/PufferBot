@@ -1,0 +1,10 @@
+# Folders
+
+node_modules
+dist
+.idea
+
+# Files
+
+yarn.lock
+package-lock.json
