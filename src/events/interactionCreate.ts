@@ -1,5 +1,5 @@
 import {
-    ButtonInteraction,
+    ButtonInteraction, GuildMember,
     Interaction,
     Message,
     MessageComponentInteraction,
@@ -20,7 +20,7 @@ import {
     getServerConsole,
     getServerStats,
     getServerStatus,
-    getUser,
+    getUser, getUsers,
     getUserServers, installServer,
     killServer,
     newServer, startServer
@@ -98,18 +98,37 @@ export = async (client: Class, interaction: Interaction) => {
         }
 
         if (interaction.commandName === "user") {
-            let entry = interaction.options.getFocused()
+            if (interaction.options.getSubcommand() === "see") {
+                let entry = interaction.options.getFocused()
 
-            let db = await users.find();
+                let db = await users.find();
 
-            db = db.filter((x: any) => x.id > 0)
+                db = db.filter((x: any) => x.id > 0)
 
-            let choices = db.filter((user: any) => user.discordId.toLowerCase().includes(entry.toLowerCase()) || user.id.toLowerCase().includes(entry.toLowerCase()))
+                let choices = db.filter((user: any) => user.discordId.toLowerCase().includes(entry.toLowerCase()) || user.id.toLowerCase().includes(entry.toLowerCase()))
 
-            await interaction.respond(entry === "" ? db.map((user: any) => ({
-                name: user.id,
-                value: String(user.id)
-            })) : choices.map((user: any) => ({name: user.id, value: String(user.id)})))
+                await interaction.respond(entry === "" ? db.map((user: any) => ({
+                    name: user.id,
+                    value: String(user.id)
+                })) : choices.map((user: any) => ({name: user.id, value: String(user.id)})))
+            }
+
+            if (interaction.options.getSubcommand() === "assign") {
+                let entry = interaction.options.getFocused()
+
+                let users = await getUsers(client);
+
+                console.log(users)
+
+                if (!users) return;
+
+                let choices = users.filter((user: any) => String(user.id).includes(entry.toLowerCase()) || user.username.toLowerCase().includes(entry.toLowerCase()))
+
+                await interaction.respond(entry === "" ? users.map((user: any) => ({
+                    name: user.username,
+                    value: String(user.id)
+                })) : choices.map((user: any) => ({name: user.username, value: String(user.id)})))
+            }
         }
     }
 
@@ -270,6 +289,10 @@ export = async (client: Class, interaction: Interaction) => {
                                 }
                             ]
                         })
+
+                        let member = await client.guilds.cache.get(client.config.guildId)!.members.fetch(interaction.user.id).catch(() => null)
+
+                        if (member) member!.roles.add(client.config.clientRoleId).catch(() => {})
 
                         await interaction.editReply({
                             content: `**${client.emotes.yes} ➜ Votre serveur sera créé dans les secondes à venir.**`,

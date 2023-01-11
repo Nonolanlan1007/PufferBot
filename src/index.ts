@@ -11,7 +11,7 @@ import emotes from "./emotes";
 class Class extends Client {
     version: string;
     slashs: Collection<string | undefined, any>;
-    config: { puffer: { token: string; clientId: string; basePanelUrl: string; }; guildId: string; mongooseConnectionString: string; owners: string[]; color: number; discordToken: string; webhook: { url: string; id: string; token: string; }; howToBuyCredits: string; };
+    config: { puffer: { token: string; clientId: string; basePanelUrl: string; }; guildId: string; mongooseConnectionString: string; owners: string[]; color: number; discordToken: string; webhook: { url: string; id: string; token: string; }; howToBuyCredits: string; clientRoleId: string; };
     emotes: { yes: string; no: string; bof: string; offline: string; online: string; streaming: string; idle: string; dnd: string; boost: string; loading: string; sort: string; entre: string; alerte: string; notif: string; question: string; cadena: string; loadBar: { red: { start: string; middle: string; end: string; }; blue: { start: string; middle: string; end: string; }; }; badges: { verifieddevelopper: string; balance: string; mod: string; bravery: string; bughuntergold: string; bughunter: string; brillance: string; hypesquadevent: string; partner: string; staff: string; earlysupporter: string; verifiedbot: string; system: string; badges: string; dev: string; verificator: string; support: string; premium: string; }; discordicons: { list: string; bot: string; textchannel: string; wave: string; entre: string; game: string; id: string; hierarchie: string; key: string; man: string; img: string; tag: string; clyde: string; horloge: string; }; credit: string; };
     color: number;
     tempToken: string | undefined;

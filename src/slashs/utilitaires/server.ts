@@ -190,8 +190,6 @@ class Server extends Slash {
 
                 const user = await users.findOne({id: serverDB.owner})
 
-
-
                 const webhook = await client.fetchWebhook(client.config.webhook.id, client.config.webhook.token)
                 const discordUser = await client.users.fetch(user!.discordId!).catch(() => null)
 
@@ -247,6 +245,11 @@ class Server extends Slash {
                         }
                     ]
                 })
+
+                let member = await client.guilds.cache.get(client.config.guildId)!.members.fetch(user!.discordId!).catch(() => null)
+                const allServers = await servers.find({owner: serverDB!.owner})
+
+                if (member && allServers.length === 0) member!.roles.remove(client.config.clientRoleId).catch(() => {})
 
                 await interaction.reply({
                     content: `**${client.emotes.yes} ➜ Le serveur \`${serverDB.id}\` a été supprimé.**`,

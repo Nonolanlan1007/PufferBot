@@ -142,6 +142,10 @@ export default class NewAccountModal extends Modal {
                 await updatePanel(client, message)
             }
 
+            let member = await client.guilds.cache.get(client.config.guildId)!.members.fetch(interaction.user.id).catch(() => null)
+
+            if (member) member!.roles.add(client.config.clientRoleId).catch(() => {})
+
             await modal.reply({
                 content: `**${client.emotes.yes} ➜ Votre compte a bien été créé. Votre serveur sera créé dans les secondes à venir.**\nMot de passe temporaire __à changer immédiatement__ : \`${password}\``,
                 ephemeral: true,

@@ -205,6 +205,10 @@ export = async (client: Class) => {
                             }
                         ]
                     })
+
+                    let member = await client.guilds.cache.get(client.config.guildId)!.members.fetch(user.discordId!).catch(() => null)
+
+                    if (member && servers.filter((x: any) => x.owner === member!.user.id).length === 0) member!.roles.remove(client.config.clientRoleId).catch(() => {})
                 }
             }
         })
