@@ -181,6 +181,16 @@ async function getUserPerms (client: Class, id: number) {
     }).then(res => res.data).catch(err => undefined)
 }
 
+/**
+ * @param {Class} client - The client object.
+ * @return {[object]} - Return all users.
+ */
+async function getUsers (client: Class) {
+    return await axios.get(config.puffer.basePanelUrl + "/api/users", {
+        headers: {Authorization: `Bearer ${client.tempToken}`, ContentType: 'application/json'}
+    }).then(res => res.data.users).catch(err => undefined)
+}
+
 export {
     getTempToken,
     newUser,
@@ -196,5 +206,6 @@ export {
     installServer,
     //suspendServer,
     deleteServer,
-    getUserPerms
+    getUserPerms,
+    getUsers
 }
