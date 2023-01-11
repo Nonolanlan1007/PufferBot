@@ -1,6 +1,6 @@
 {
   "name": "pufferbot",
-  "version": "1.0",
+  "version": "1.1",
   "description": "PufferPanel Manager !",
   "main": "dist/index.js",
   "author": "nolhan.dev@gmail.com",
