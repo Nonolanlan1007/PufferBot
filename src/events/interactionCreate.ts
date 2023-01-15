@@ -458,7 +458,7 @@ export = async (client: Class, interaction: Interaction) => {
                                     embeds: [
                                         {
                                             title: `${status ? "🟢" : "🔴"} ${server.server.name}`,
-                                            description: `Cette interface est mise à jour toutes les 10 secondes. Attention, elle expire automatiquement au bout de 2 minutes !\n\`\`\`js\n${!Console && Console ? Console!.slice((Console.length - 3950), Console.length) : "Serveur arrêté."}\`\`\``,
+                                            description: `Cette interface est mise à jour toutes les 10 secondes. Attention, elle expire automatiquement au bout de 2 minutes !\n\`\`\`js\n${Console ? Console!.slice((Console.length - 3950), Console.length) : "Serveur arrêté."}\`\`\``,
                                             color: client.color,
                                             footer: {
                                                 text: "Pour éviter de potentiels bugs, il est recommendé de démarrer/arrêter votre service depuis cette interface."
