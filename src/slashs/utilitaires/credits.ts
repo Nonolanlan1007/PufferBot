@@ -63,7 +63,8 @@ class Credits extends Slash {
                 }
 
                 await interaction.reply({
-                    content: `**${client.emotes.yes} ➜ Ce membre a ${db.credits} ${client.emotes.credit}.**`
+                    content: `**${client.emotes.yes} ➜ Ce membre a ${db.credits} ${client.emotes.credit}.**`,
+			  ephemeral: true
                 })
                 break
             }
