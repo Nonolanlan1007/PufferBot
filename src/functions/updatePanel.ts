@@ -6,7 +6,7 @@ export async function updatePanel (client: Class, message: Message) {
     let produits = await products.find()
     produits = produits.filter((p: any) => p.stock > 0)
 
-    let map = produits.length > 0 ? produits.map((p: any) => `**${p.title}**\n> - Prix : ${p.price} ${client.emotes.credit}\n> - Stock restant : ${p.stock}`).join('\n\n') : `*Il n'y a actuellement au produit en vente.*${message.guild && message.guild.commands.cache.find(x => x.name === "product") ? ` *Ajoutez-en un avec la commande </product add:${message.guild.commands.cache.find(x => x.name === "product")?.id}> ou ajoutez du stock avec la commande </product stock:${message.guild.commands.cache.find(x => x.name === "product")?.id}>*` : ""}`
+    let map = produits.length > 0 ? produits.map((p: any) => `**${p.title}**\n> - Prix : ${p.price} ${client.emotes.credit}\n> - Stock restant : ${p.stock}`).join('\n\n') : `*Il n'y a actuellement aucun produit en vente.*${message.guild && message.guild.commands.cache.find(x => x.name === "product") ? ` *Ajoutez-en un avec la commande </product add:${message.guild.commands.cache.find(x => x.name === "product")?.id}> ou ajoutez du stock avec la commande </product stock:${message.guild.commands.cache.find(x => x.name === "product")?.id}>*` : ""}`
 
     await message.edit({
         content: null,
