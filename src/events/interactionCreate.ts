@@ -378,7 +378,7 @@ export = async (client: Class, interaction: Interaction) => {
 
             const serversInDB = await serversDB.find({ owner: user.id })
 
-            servers.filter((server: any) => serversInDB.find((s: any) => s.id === server.id) !== undefined)
+            servers.servers = servers.servers.filter((server: any) => serversInDB.find((s: any) => s.id === server.id) !== undefined)
 
             let FIELDS = [] as any[]
 
