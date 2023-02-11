@@ -369,12 +369,16 @@ export = async (client: Class, interaction: Interaction) => {
                 ephemeral: true
             })
 
-            const servers = await getUserServers(client, pufferUser.username)
+            let servers = await getUserServers(client, pufferUser.username)
 
             if (servers.servers.length === 0) return interaction.reply({
                 content: `**${client.emotes.no} ➜ Vous n'avez aucun serveur.**`,
                 ephemeral: true
             })
+
+            const serversInDB = await serversDB.find({ owner: user.id })
+
+            servers.filter((server: any) => serversInDB.find((s: any) => s.id === server.id) !== undefined)
 
             let FIELDS = [] as any[]
 
